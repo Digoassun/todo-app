@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import './App.css'
-import {ThemeProvider} from "@mui/material";
+import {CssBaseline, ThemeProvider} from "@mui/material";
 import {ThemeButton} from "./components/ThemeButton";
 import {useThemeContext} from "./theme/ThemeContextProvider.tsx";
 
@@ -10,6 +10,7 @@ function App() {
 
     return (
         <ThemeProvider theme={theme}>
+            <CssBaseline/>
             <>
                 <ThemeButton/>
                 <div className="card">
