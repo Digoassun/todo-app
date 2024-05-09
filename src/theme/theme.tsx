@@ -5,3 +5,5 @@ const theme = {
         primary:amber
     }
 }
+
+export default theme;
