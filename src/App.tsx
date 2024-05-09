@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import './App.css'
-import {CssBaseline, ThemeProvider} from "@mui/material";
+import {CssBaseline, ThemeProvider, Typography} from "@mui/material";
 import {ThemeButton} from "./components/ThemeButton";
 import {useThemeContext} from "./theme/ThemeContextProvider.tsx";
 
@@ -13,6 +13,7 @@ function App() {
             <CssBaseline/>
             <>
                 <ThemeButton/>
+                {/*<Typography variant="h1" sx={{color:'text.primary'}}>TODO</Typography>*/}
                 <div className="card">
                     <button onClick={() => setCount((count) => count + 1)}>
                         count is {count}

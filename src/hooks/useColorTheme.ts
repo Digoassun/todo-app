@@ -1,6 +1,6 @@
 import {useMemo, useState} from "react";
 import {createTheme} from "@mui/material";
-import theme from '../theme/theme.tsx'
+import {getPalette} from '../theme/theme.tsx'
 
 export const useColorTheme = () => {
     const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
@@ -11,13 +11,7 @@ export const useColorTheme = () => {
 
 
     const modifiedTheme = useMemo(() =>
-        createTheme({
-            ...theme,
-            palette:{
-                ...theme.palette,
-                mode:themeMode
-            }
-        }),
+        createTheme(getPalette(themeMode)),
             [themeMode]
     )
 
