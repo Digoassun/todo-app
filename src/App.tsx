@@ -1,33 +1,37 @@
-import {useState} from 'react'
-import './App.css'
-import {CssBaseline, ThemeProvider} from "@mui/material";
-import {ThemeButton} from "./components/ThemeButton";
+import {Box, CssBaseline, ThemeProvider} from "@mui/material";
 import {useThemeContext} from "./theme/ThemeContextProvider.tsx";
-import {Header} from "./components/Header";
+import {Header} from "./layout/Header";
+import {BoxTitle} from "./components/BoxTitle";
+import {ToDoList} from "./components/ToDoList";
+import {useEffect, useState} from "react";
 
 function App() {
-    const {theme} = useThemeContext();
-    const [count, setCount] = useState(0)
+    const {theme,mode} = useThemeContext();
+    const [isMobile, setIsMobile] = useState(false)
 
+    const handleResize = () => {
+        if (window.innerWidth < 720) {
+            setIsMobile(true)
+        } else {
+            setIsMobile(false)
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener("resize", handleResize)
+    })
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
-            <Header/>
-            <>
-                <ThemeButton/>
-                {/*<Typography variant="h1" sx={{color:'text.primary'}}>TODO</Typography>*/}
-                <div className="card">
-                    <button onClick={() => setCount((count) => count + 1)}>
-                        count is {count}
-                    </button>
-                    <p>
-                        Edit <code>src/App.tsx</code> and save to test HMR
-                    </p>
-                </div>
-                <p className="read-the-docs">
-                    Click on the Vite and React logos to learn more
-                </p>
-            </>
+            <Header mode={mode}/>
+            <Box component="main" sx={{
+                zIndex: 2,
+                width:'65vw',
+                maxWidth:'500px',
+            }}>
+                <BoxTitle/>
+                <ToDoList isMobile={isMobile} mode={mode}/>
+            </Box>
         </ThemeProvider>
     )
 }

@@ -1,33 +1,38 @@
 @font-face {
-  font-family: 'JosefinSans';
-  font-weight: 400;
-  src: local('JosefinSans'), url(/src/assets/fonts/JosefinSans-Regular.ttf) format('truetype');
+    font-family: 'JosefinSans';
+    font-weight: 400;
+    src: local('JosefinSans'), url(/src/assets/fonts/JosefinSans-Regular.ttf) format('truetype');
 }
 @font-face {
-  font-family: 'JosefinSans';
-  font-weight: 700;
-  src: local('JosefinSans'), url(/src/assets/fonts/JosefinSans-Bold.ttf) format('truetype');
+    font-family: 'JosefinSans';
+    font-weight: 700;
+    src: local('JosefinSans'), url(/src/assets/fonts/JosefinSans-Bold.ttf) format('truetype');
 }
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-weight: 400;
-  list-style-type: none;
-  font-family: 'JosefinSans', sans-serif;
-
-  a, a:hover, a:focus, a:active {
-    text-decoration: none;
-    position: relative;
-    cursor: pointer;
-    color: inherit;
-  }
-
-  p {
     margin: 0;
-  }
+    padding: 0;
+    box-sizing: border-box;
+    font-weight: 400;
+    list-style-type: none;
+
+
+    a, a:hover, a:focus, a:active {
+        text-decoration: none;
+        position: relative;
+        cursor: pointer;
+        color: inherit;
+    }
+
+    p {
+        margin: 0;
+    }
 }
 
 body {
-  min-height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 80px;
 }

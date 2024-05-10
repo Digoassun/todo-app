@@ -1,9 +1,9 @@
 import {useMemo, useState} from "react";
 import {createTheme} from "@mui/material";
-import {getPalette} from '../theme/theme.tsx'
+import {getCustomTheme} from '../theme/theme.tsx'
 
 export const useColorTheme = () => {
-    const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
+    const [themeMode, setThemeMode] = useState<'light' | 'dark'>('dark');
 
     const toggleColorMode = () => {
         setThemeMode((prevState) => (prevState === 'light' ? 'dark' : 'light'))
@@ -11,7 +11,7 @@ export const useColorTheme = () => {
 
 
     const modifiedTheme = useMemo(() =>
-        createTheme(getPalette(themeMode)),
+        createTheme(getCustomTheme(themeMode)),
             [themeMode]
     )
 

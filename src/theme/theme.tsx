@@ -25,19 +25,48 @@ import {PaletteMode} from "@mui/material";
 // - Very Dark Grayish Blue: hsl(233, 14%, 35%)
 // - Very Dark Grayish Blue: hsl(237, 14%, 26%)
 
-export const getPalette = (mode: PaletteMode) => ({
+export const getCustomTheme = (mode: PaletteMode) => ({
     palette: {
         mode,
         ...(mode === 'light') ?
             {
-                background: {default:'hsl(0, 0%, 98%)'},
-                text: {primary: 'red'}
+                background: {
+                    default: '#fafafa',
+                    paper: 'hsl(0, 0%, 98%)'
+                },
+                text: {
+                    primary: 'hsl(244, 7%, 43%)',
+                    secondary: 'hsl(260, 3%, 63%)',
+                    disabled: 'hsl(240, 2%, 83%)'
+                },
+                divider: '#e8e7eb'
             }
             :
             {
-                background: {default:'hsl(235, 21%, 11%)'},
-                text: {primary: 'blue'},
+                background: {
+                    default: 'hsl(235, 21%, 11%)',
+                    paper: 'hsl(235, 24%, 19%)'
+                },
+                text: {
+                    primary: 'hsl(234, 39%, 85%)',
+                    secondary: 'hsl(234, 11%, 52%)',
+                    disabled: 'hsl(233, 14%, 35%)'
+                },
+                divider: '#6e729b'
 
             }
-    }
+    },
+    typography: {
+        fontFamily: [
+            'JosefinSans',
+            'sans',
+        ].join(','),
+    },
+    components: {
+        MuiButtonBase: {
+            defaultProps: {
+                disableRipple: true,
+            },
+        },
+    },
 });

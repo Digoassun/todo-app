@@ -1,5 +1,4 @@
 import {styled} from "@mui/material";
-import {useThemeContext} from "../../theme/ThemeContextProvider.tsx";
 interface StyledHeaderProps {
     mode: string
 }
@@ -7,6 +6,7 @@ interface StyledHeaderProps {
 const imgPathMaker = (device:string,mode:string)=> `/images/bg-${device}-${mode}.jpg`
 
 const StyledHeader = styled("header")(({mode}: StyledHeaderProps)=>({
+    zIndex:0,
     width:'100%',
     position:'absolute',
     height:'200px',
@@ -16,13 +16,17 @@ const StyledHeader = styled("header")(({mode}: StyledHeaderProps)=>({
     backgroundSize:'cover',
     '@media (min-width:768px)' : {
         height:'300px',
-        background: `url(${imgPathMaker('desktop',mode)}) center no-repeat`
+        background: `url(${imgPathMaker('desktop',mode)}) center no-repeat`,
+        backgroundSize:'cover',
+
     }
 }))
-export const Header = () => {
-     const {mode} = useThemeContext();
+
+type Props = {
+    mode:string
+}
+export const Header = ({mode}:Props) => {
     return (
-        <StyledHeader mode={mode}>
-        </StyledHeader>
+        <StyledHeader mode={mode}></StyledHeader>
     );
 };
