@@ -19,7 +19,7 @@ function App() {
 
     useEffect(() => {
         window.addEventListener("resize", handleResize)
-    })
+    },[])
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
