@@ -38,7 +38,6 @@ type Props = {
 };
 
 interface ToDo {
-    id: number;
     text: string,
     completed: boolean,
 }
@@ -60,7 +59,6 @@ export const ToDoList = ({isMobile, mode}: Props) => {
     const addNewTask = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         const newTask: ToDo = {
-            id: toDos.length + 1,
             text: text,
             completed: false
         };
@@ -78,9 +76,9 @@ export const ToDoList = ({isMobile, mode}: Props) => {
         }
     }
 
-    const completeTask = (id: number) => {
-        const changedArray = toDos.map((value: ToDo) => {
-            if (value.id === id) {
+    const completeTask = (index: number) => {
+        const changedArray = toDos.map((value: ToDo,i) => {
+            if (i === index) {
                 return {...value, completed: !value.completed}
             }
             return value
@@ -88,8 +86,8 @@ export const ToDoList = ({isMobile, mode}: Props) => {
         setToDos(changedArray);
     }
 
-    const removeTask = (id: number) => {
-        setToDos(prevState => prevState.filter((value: ToDo) => value.id !== id));
+    const removeTask = (index: number) => {
+        setToDos(prevState => prevState.filter((_,i) => i !== index));
     }
 
     const removeCompletedTasks = () => {
@@ -128,10 +126,10 @@ export const ToDoList = ({isMobile, mode}: Props) => {
             <StyledList mode={mode}>
                 {viewToDoList.length > 0 && viewToDoList.map((item, index) => {
                     return (
-                        <ListItemButton key={item.id} sx={{padding: 0}} divider
+                        <ListItemButton key={index} sx={{padding: 0}} divider
                                         onClick={(e) => {
                                             e.stopPropagation();
-                                            completeTask(item.id)
+                                            completeTask(index)
                                         }}
                                         onMouseEnter={() => setHoveredIndex(index)}
                                         onMouseLeave={() => setHoveredIndex(null)}>
@@ -158,7 +156,7 @@ export const ToDoList = ({isMobile, mode}: Props) => {
                                     <IconButton edge="end" sx={{zIndex: 4}}
                                                 onClick={(e) => {
                                                     e.stopPropagation();
-                                                    removeTask(item.id)
+                                                    removeTask(index)
                                                 }}>
                                         <CloseIcon/>
                                     </IconButton>
