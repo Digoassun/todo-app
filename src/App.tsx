@@ -7,19 +7,17 @@ import {useEffect, useState} from "react";
 
 function App() {
     const {theme,mode} = useThemeContext();
-    const [isMobile, setIsMobile] = useState(false)
-
-    const handleResize = () => {
-        if (window.innerWidth < 720) {
-            setIsMobile(true)
-        } else {
-            setIsMobile(false)
-        }
-    }
+    const [isMobile, setIsMobile] = useState<boolean>(false);
 
     useEffect(() => {
-        window.addEventListener("resize", handleResize)
-    },[])
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 720);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
