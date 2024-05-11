@@ -56,15 +56,26 @@ export const ToDoList = ({isMobile, mode}: Props) => {
         {text: 'Completed', value: 2},
     ];
 
+    const setInitialTodos = () => {
+        const storageList = JSON.parse(localStorage.getItem('todosList') || '[]');
+        setToDos(storageList)
+    }
+
+    const setToDosAndLocalStorage = (arr: ToDo[]) => {
+        setToDos(arr);
+        localStorage.setItem('todosList', JSON.stringify(arr));
+    };
+
     const addNewTask = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         const newTask: ToDo = {
             text: text,
             completed: false
         };
-        setToDos(prevState => [...prevState, newTask]);
+        const newArray = [...toDos, newTask];
+        setToDosAndLocalStorage(newArray);
         setText('');
-    };
+    }
 
     const filterTasks = () => {
         if (selectedFilter === 0) {
@@ -76,23 +87,29 @@ export const ToDoList = ({isMobile, mode}: Props) => {
         }
     }
 
-    const completeTask = (index: number) => {
-        const changedArray = toDos.map((value: ToDo,i) => {
+    const toggleTaskCompletion = (index: number) => {
+        const changedArray = toDos.map((value: ToDo, i) => {
             if (i === index) {
-                return {...value, completed: !value.completed}
+                return {...value, completed: !value.completed};
             }
-            return value
+            return value;
         });
-        setToDos(changedArray);
-    }
+        setToDosAndLocalStorage(changedArray);
+    };
 
     const removeTask = (index: number) => {
-        setToDos(prevState => prevState.filter((_,i) => i !== index));
-    }
+        const changedArray = toDos.filter((_, i) => i !== index);
+        setToDosAndLocalStorage(changedArray);
+    };
 
     const removeCompletedTasks = () => {
-        setToDos(prevState => prevState.filter((value: ToDo) => !value.completed));
-    }
+        const changedArray = toDos.filter((value: ToDo) => !value.completed);
+        setToDosAndLocalStorage(changedArray);
+    };
+
+    useEffect(() => {
+        setInitialTodos();
+    }, []);
 
     useEffect(() => {
         filterTasks();
@@ -129,7 +146,7 @@ export const ToDoList = ({isMobile, mode}: Props) => {
                         <ListItemButton key={index} sx={{padding: 0}} divider
                                         onClick={(e) => {
                                             e.stopPropagation();
-                                            completeTask(index)
+                                            toggleTaskCompletion(index)
                                         }}
                                         onMouseEnter={() => setHoveredIndex(index)}
                                         onMouseLeave={() => setHoveredIndex(null)}>
