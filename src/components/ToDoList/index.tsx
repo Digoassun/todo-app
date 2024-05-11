@@ -17,12 +17,12 @@ import {
 } from "./style.ts";
 import {ChangeEvent, useEffect, useState} from "react";
 
-// const CheckIcon = createSvgIcon(
-//     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-//         <path fill="none" stroke="#FFF" strokeWidth="2" d="M1 4.304L3.696 7l6-6"/>
-//     </svg>,
-//     'CheckIcon',
-// );
+const CheckIcon = createSvgIcon(
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
+        <path fill="none" stroke="#FFF" strokeWidth="2" d="M1 4.304L3.696 7l6-6"/>
+    </svg>,
+    'CheckIcon',
+);
 
 const CloseIcon = createSvgIcon(
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
@@ -51,6 +51,12 @@ export const ToDoList = ({isMobile, mode}: Props) => {
     const [toDos, setToDos] = useState<ToDo[]>([]);
     const [viewToDoList, setViewToDoList] = useState<ToDo[]>([]);
 
+    const filters = [
+        {text: 'All', value: 0},
+        {text: 'Active', value: 1},
+        {text: 'Completed', value: 2},
+    ];
+
     const addNewTask = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         const newTask: ToDo = {
@@ -63,7 +69,6 @@ export const ToDoList = ({isMobile, mode}: Props) => {
     };
 
     const filterTasks = () => {
-        console.log(toDos)
         if (selectedFilter === 0) {
             setViewToDoList(toDos)
         } else if (selectedFilter === 1) {
@@ -132,13 +137,23 @@ export const ToDoList = ({isMobile, mode}: Props) => {
                                         onMouseLeave={() => setHoveredIndex(null)}>
                             <StyledPaper square>
                                 <StyledRadio
+                                    checkedIcon={<CheckIcon sx={{
+                                        fontSize: '24px',
+                                        borderRadius: '50%',
+                                        padding: '5px',
+                                        background: 'linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%))'
+                                    }}/>}
                                     sx={{color: theme.palette.text.disabled}}
                                     edge="start"
                                     checked={item.completed}
                                     disableRipple
                                 />
-                                <ListItemText
-                                    color={item.completed ? "text.disabled" : "text.primary"}>{item.text}</ListItemText>
+                                <ListItemText sx={{
+                                    textDecorationLine: item.completed ? 'line-through' : "inherit",
+                                    color: item.completed ? theme.palette.text.disabled : theme.palette.text.primary
+                                }}>
+                                    {item.text}
+                                </ListItemText>
                                 {(isMobile || hoveredIndex === index) && (
                                     <IconButton edge="end" sx={{zIndex: 4}}
                                                 onClick={(e) => {
@@ -161,18 +176,12 @@ export const ToDoList = ({isMobile, mode}: Props) => {
                         {!isMobile && <Typography sx={{fontSize: 14}} color="text.secondary">{viewToDoList.length} items
                             left</Typography>}
                         <Box sx={{display: 'flex', gap: '16px'}}>
-                            <ActionButton onClick={() => setSelectedFilter(0)}>
-                                <StyledButtonText hovercolor={theme.palette.text.primary}
-                                                  color={selectedFilter === 0 ? theme.palette.text.primary : "text.secondary"}>All</StyledButtonText>
-                            </ActionButton>
-                            <ActionButton onClick={() => setSelectedFilter(1)}>
-                                <StyledButtonText hovercolor={theme.palette.text.primary}
-                                                  color={selectedFilter === 1 ? theme.palette.text.primary : "text.secondary"}>Active</StyledButtonText>
-                            </ActionButton>
-                            <ActionButton onClick={() => setSelectedFilter(2)}>
-                                <StyledButtonText hovercolor={theme.palette.text.primary}
-                                                  color={selectedFilter === 2 ? theme.palette.text.primary : "text.secondary"}>Completed</StyledButtonText>
-                            </ActionButton>
+                            {filters.map((item, index) =>
+                                <ActionButton key={index} onClick={() => setSelectedFilter(item.value)}>
+                                    <StyledButtonText hovercolor={theme.palette.text.primary}
+                                                      color={selectedFilter === item.value ? theme.palette.text.primary : "text.secondary"}>{item.text}</StyledButtonText>
+                                </ActionButton>
+                            )}
                         </Box>
                         {!isMobile &&
                             <ActionButton onClick={removeCompletedTasks}>

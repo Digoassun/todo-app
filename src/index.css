@@ -1,12 +1,12 @@
 @font-face {
     font-family: 'JosefinSans';
     font-weight: 400;
-    src: local('JosefinSans'), url(/src/assets/fonts/JosefinSans-Regular.ttf) format('truetype');
+    src: url(/src/assets/fonts/JosefinSans-Regular.ttf);
 }
 @font-face {
     font-family: 'JosefinSans';
     font-weight: 700;
-    src: local('JosefinSans'), url(/src/assets/fonts/JosefinSans-Bold.ttf) format('truetype');
+    src: url(/src/assets/fonts/JosefinSans-Bold.ttf);
 }
 
 * {
@@ -15,6 +15,7 @@
     box-sizing: border-box;
     font-weight: 400;
     list-style-type: none;
+    font-family: 'JosefinSans', sans-serif !important;
 
 
     a, a:hover, a:focus, a:active {

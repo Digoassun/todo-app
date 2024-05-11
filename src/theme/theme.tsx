@@ -56,12 +56,6 @@ export const getCustomTheme = (mode: PaletteMode) => ({
 
             }
     },
-    typography: {
-        fontFamily: [
-            'JosefinSans',
-            'sans',
-        ].join(','),
-    },
     components: {
         MuiButtonBase: {
             defaultProps: {
