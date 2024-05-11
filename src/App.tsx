@@ -26,7 +26,7 @@ function App() {
             <Header mode={mode}/>
             <Box component="main" sx={{
                 zIndex: 2,
-                width:'65vw',
+                width:isMobile?'80vw':'65vw',
                 maxWidth:'500px',
             }}>
                 <BoxTitle/>

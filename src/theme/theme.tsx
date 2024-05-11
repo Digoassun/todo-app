@@ -39,7 +39,7 @@ export const getCustomTheme = (mode: PaletteMode) => ({
                     secondary: 'hsl(260, 3%, 63%)',
                     disabled: 'hsl(240, 2%, 83%)'
                 },
-                divider: '#e8e7eb'
+                divider: 'hsl(240, 2%, 83%)'
             }
             :
             {
@@ -52,7 +52,7 @@ export const getCustomTheme = (mode: PaletteMode) => ({
                     secondary: 'hsl(234, 11%, 52%)',
                     disabled: 'hsl(233, 14%, 35%)'
                 },
-                divider: '#6e729b'
+                divider: 'hsl(233, 14%, 35%)'
 
             }
     },

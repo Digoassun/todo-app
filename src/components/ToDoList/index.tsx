@@ -118,7 +118,7 @@ export const ToDoList = ({isMobile, mode}: Props) => {
     return (
         <StyledListBox component="section">
             <form onSubmit={addNewTask}>
-                <Paper sx={{padding: '12px 24px'}} elevation={1}>
+                <Paper sx={{padding: '12px 24px',boxShadow:'none'}} >
                     <StyledTextField placeholder="Create a new todo..."
                                      value={text}
                                      onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -150,7 +150,7 @@ export const ToDoList = ({isMobile, mode}: Props) => {
                                         }}
                                         onMouseEnter={() => setHoveredIndex(index)}
                                         onMouseLeave={() => setHoveredIndex(null)}>
-                            <StyledPaper square>
+                            <StyledPaper square sx={{boxShadow:'none'}}>
                                 <StyledRadio
                                     checkedIcon={<CheckIcon sx={{
                                         fontSize: '24px',
@@ -175,7 +175,7 @@ export const ToDoList = ({isMobile, mode}: Props) => {
                                                     e.stopPropagation();
                                                     removeTask(index)
                                                 }}>
-                                        <CloseIcon/>
+                                        <CloseIcon sx={{fontSize:'16px'}}/>
                                     </IconButton>
                                 )}
                             </StyledPaper>
@@ -194,7 +194,7 @@ export const ToDoList = ({isMobile, mode}: Props) => {
                             {filters.map((item, index) =>
                                 <ActionButton key={index} onClick={() => setSelectedFilter(item.value)}>
                                     <StyledButtonText hovercolor={theme.palette.text.primary}
-                                                      color={selectedFilter === item.value ? theme.palette.text.primary : "text.secondary"}>{item.text}</StyledButtonText>
+                                                      color={selectedFilter === item.value ? 'hsl(220, 98%, 61%)': "text.secondary"}>{item.text}</StyledButtonText>
                                 </ActionButton>
                             )}
                         </Box>
