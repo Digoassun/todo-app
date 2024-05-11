@@ -14,7 +14,7 @@ const StyledHeader = styled("header")(({mode}: StyledHeaderProps)=>({
     left:0,
     background: `url(${imgPathMaker('mobile',mode)}) center no-repeat`,
     backgroundSize:'cover',
-    '@media (min-width:768px)' : {
+    '@media (min-width:720px)' : {
         height:'300px',
         background: `url(${imgPathMaker('desktop',mode)}) center no-repeat`,
         backgroundSize:'cover',

@@ -14,6 +14,7 @@ export const StyledTextField = styled(TextField)(() => ({
     '& .MuiInputBase-root::after': {
         borderBottom: 'none !important'
     },
+    width:'100%'
 }))
 
 export const StyledPaper = styled(Paper)(() => ({
@@ -51,14 +52,14 @@ export const StyledRadio = styled(Radio)(() => ({
 }))
 
 interface StyledButtonTextProps {
-    hoverColor: string
+    hovercolor: string
 }
 
-export const StyledButtonText = styled(Typography)(({hoverColor}:StyledButtonTextProps) => ({
+export const StyledButtonText = styled(Typography)(({hovercolor}:StyledButtonTextProps) => ({
     textTransform:'capitalize',
     fontSize: 14,
     fontWeight: 700,
     '&:hover': {
-        color: hoverColor
+        color: hovercolor
     }
 }))

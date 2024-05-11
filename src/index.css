@@ -35,4 +35,7 @@ body {
     align-items: flex-start;
     justify-content: center;
     padding-top: 80px;
+    @media(max-width: 719px){
+        padding-top: 32px;
+    }
 }
