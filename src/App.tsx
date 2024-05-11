@@ -3,17 +3,21 @@ import {useThemeContext} from "./theme/ThemeContextProvider.tsx";
 import {Header} from "./layout/Header";
 import {BoxTitle} from "./components/BoxTitle";
 import {ToDoList} from "./components/ToDoList";
-import {useEffect, useState} from "react";
+import { useLayoutEffect, useState} from "react";
 
 function App() {
     const {theme,mode} = useThemeContext();
-    const [isMobile, setIsMobile] = useState<boolean>(false);
+    const [isMobile, setIsMobile] = useState<boolean>(true);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth < 720);
         };
+
+        handleResize();
+
         window.addEventListener('resize', handleResize);
+
         return () => {
             window.removeEventListener('resize', handleResize);
         };
