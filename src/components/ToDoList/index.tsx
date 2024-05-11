@@ -83,8 +83,12 @@ export const ToDoList = ({isMobile, mode}: Props) => {
         setToDos(changedArray);
     }
 
-    const removeTask = (id:number)=>{
-        setToDos(prevState => prevState.filter((value: ToDo) => value.id !== id ));
+    const removeTask = (id: number) => {
+        setToDos(prevState => prevState.filter((value: ToDo) => value.id !== id));
+    }
+
+    const removeCompletedTasks = () => {
+        setToDos(prevState => prevState.filter((value: ToDo) => !value.completed));
     }
 
     useEffect(() => {
@@ -120,7 +124,10 @@ export const ToDoList = ({isMobile, mode}: Props) => {
                 {viewToDoList.length > 0 && viewToDoList.map((item, index) => {
                     return (
                         <ListItemButton key={item.id} sx={{padding: 0}} divider
-                                        onClick={() => completeTask(item.id)}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            completeTask(item.id)
+                                        }}
                                         onMouseEnter={() => setHoveredIndex(index)}
                                         onMouseLeave={() => setHoveredIndex(null)}>
                             <StyledPaper square>
@@ -130,9 +137,14 @@ export const ToDoList = ({isMobile, mode}: Props) => {
                                     checked={item.completed}
                                     disableRipple
                                 />
-                                <ListItemText color={item.completed ? "text.disabled" : "text.primary"}>{item.text}</ListItemText>
+                                <ListItemText
+                                    color={item.completed ? "text.disabled" : "text.primary"}>{item.text}</ListItemText>
                                 {(isMobile || hoveredIndex === index) && (
-                                    <IconButton edge="end" onClick={()=>removeTask(item.id)}>
+                                    <IconButton edge="end" sx={{zIndex: 4}}
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    removeTask(item.id)
+                                                }}>
                                         <CloseIcon/>
                                     </IconButton>
                                 )}
@@ -162,10 +174,11 @@ export const ToDoList = ({isMobile, mode}: Props) => {
                                                   color={selectedFilter === 2 ? theme.palette.text.primary : "text.secondary"}>Completed</StyledButtonText>
                             </ActionButton>
                         </Box>
-                        {!isMobile && <ActionButton>
-                            <Typography sx={{textTransform: 'capitalize', fontSize: 14}} color="text.secondary">Clean
-                                Completed</Typography>
-                        </ActionButton>}
+                        {!isMobile &&
+                            <ActionButton onClick={removeCompletedTasks}>
+                                <Typography sx={{textTransform: 'capitalize', fontSize: 14}} color="text.secondary">Clean
+                                    Completed</Typography>
+                            </ActionButton>}
                     </StyledPaper>
                 </ListItem>
             </StyledList>
